@@ -27,12 +27,12 @@ form.addEventListener('submit', function (event) {
   //   alert('Maximum number of lifts allowed is 10.');
   //   return;
   // }
-  if (numLifts > numFloors) {
-    alert(
-      'Number of lifts should be less than or equal to the number of floors.'
-    )
-    return
-  }
+  // if (numLifts > numFloors) {
+  //   alert(
+  //     'Number of lifts should be less than or equal to the number of floors.'
+  //   )
+  //   return
+  // }
 
   mainContainer.style.display = 'none'
   generateFloors(numFloors)
@@ -40,12 +40,23 @@ form.addEventListener('submit', function (event) {
 })
 //generate floors
 function generateFloors(numFloors) {
+  if (numFloors <= 3) {
+    floorsContainer.classList.add('floor-position')
+  } else {
+    floorsContainer.classList.remove('floor-position')
+  }
   for (let floor = numFloors; floor >= 1; floor--) {
     const floorDiv = document.createElement('div')
     const floorContent = document.createElement('div')
     floorContent.classList.add('floor-content')
 
-    if (floor !== numFloors) {
+    if (floor === 1) {
+      const upButton = document.createElement('button')
+      upButton.textContent = '⬆️'
+      upButton.classList.add('lift-button', 'up-button')
+      floorContent.appendChild(upButton)
+    }
+    if (floor !== numFloors && floor !== 1) {
       const upButton = document.createElement('button')
       upButton.textContent = '⬆️'
       upButton.classList.add('lift-button', 'up-button')
